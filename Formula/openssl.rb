@@ -12,7 +12,7 @@ class Openssl < Formula
   bottle do
     root_url "https://raw.githubusercontent.com/jash-kothari/homebrew-formulae/master/Formula/"
     rebuild 1
-    sha256 "2d59d49f0abb499ba03eab2d2966219148b49dc365efa4c550d852e33e456606" => :catalina
+    sha256 "2d59d49f0abb499ba03eab2d2966219148b49dc365efa4c550d852e33e456606": :catalina
   end
 
   keg_only :provided_by_macos,
