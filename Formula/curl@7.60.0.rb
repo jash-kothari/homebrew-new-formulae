@@ -1,4 +1,4 @@
-class Curl < Formula
+class CurlAT7600 < Formula
   desc "Get a file from an HTTP, HTTPS or FTP server"
   homepage "https://curl.haxx.se/"
   url "https://curl.haxx.se/download/curl-7.60.0.tar.bz2"
@@ -36,11 +36,11 @@ class Curl < Formula
   end
 
   depends_on "pkg-config" => :build
+  depends_on "rtmpdump" => :optional
+  depends_on "libssh2" => :optional
   depends_on "c-ares" => :optional
   depends_on "libmetalink" => :optional
-  depends_on "libssh2" => :optional
   depends_on "nghttp2" => :optional
-  depends_on "rtmpdump" => :optional
 
   def install
     system "./buildconf" if build.head?
@@ -71,10 +71,10 @@ class Curl < Formula
     args << (build.with?("gssapi") ? "--with-gssapi" : "--without-gssapi")
     args << (build.with?("rtmpdump") ? "--with-librtmp" : "--without-librtmp")
 
-    args << if build.with? "c-ares"
-      "--enable-ares=#{Formula["c-ares"].opt_prefix}"
+    if build.with? "c-ares"
+      args << "--enable-ares=#{Formula["c-ares"].opt_prefix}"
     else
-      "--disable-ares"
+      args << "--disable-ares"
     end
 
     system "./configure", *args
